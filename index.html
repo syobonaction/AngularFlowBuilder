@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+  <head>
+    <title>SASHA Angular</title>
+    <meta content="width=device-width, initial-scale=1.0 maximum-scale=1, user-scalable=0" name="viewport">
+    <link href='https://fonts.googleapis.com/css?family=Cuprum:400,700' rel='stylesheet' type='text/css'>
+    <link href='css/normalize.css' rel='stylesheet' type='text/css'>
+    <link href='css/stylesheet.css' rel='stylesheet' type='text/css'>
+  </head>
+  <body ng-controller="ctrlMain">
+    <div id="container">
+      <header>
+        <h1 ng-model="flows.header">{{flows.header}}</h1>
+      </header>
+      <section id="content">
+        <h2 ng-model="flows.subheader">{{flows.subheader}}</h2>
+        <div class="option" ng-repeat="option in flows.options">
+          <input type="radio" id="{{option.name}}" name="callType" value="{{option.name}}"></input>
+          <label for="{{option.name}}" ng-model="option.title">{{option.title}}</label>
+        </div>
+      </section><section id="info">
+        Stuff
+      </section>
+      <footer>
+        <button class="btn continue">Continue</button>
+      </footer>
+    </div>
+  </body>
+  <script type="text/javascript" src="https://code.angularjs.org/1.4.0-rc.2/angular.min.js"></script>
+  <script type="text/javascript" src="js/flows.js"></script>
+  <script type="text/javascript" src="js/app.js"></script>
+
+</html>

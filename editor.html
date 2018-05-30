@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+  <head>
+    <title>SASHA Angular</title>
+    <meta content="width=device-width, initial-scale=1.0 maximum-scale=1, user-scalable=0" name="viewport">
+    <link href='https://fonts.googleapis.com/css?family=Cuprum:400,700' rel='stylesheet' type='text/css'>
+    <link href='css/normalize.css' rel='stylesheet' type='text/css'>
+    <link href='css/stylesheet.css' rel='stylesheet' type='text/css'>
+  </head>
+  <body ng-controller="ctrlMain">
+    <div ng-show="overlayOn" id="overlayContainer">
+      <div id="overlay"></div>
+      <div ng-show="editingRadio" class="overlayOpts">
+        <ul>
+          <li>Title: <input type="text" ng-model="currRadio.title"/></li>
+          <li>ID: <input type="text" ng-model="currRadio.id"/></li>
+          <li>Name: <input type="text" ng-model="currRadio.name"/></li>
+          <li>Value: <input type="text" ng-model="currRadio.value"/></li>
+          <li><button ng-click="addSuboption()">Add Suboption</button></li>
+          <li><button ng-click="removeOption(currRadio)">Remove Option</button></li>
+        </ul>
+        <button ng-click="radioOptions()">Confirm</button>
+        <button ng-click="radioOptions()">Cancel</button>
+      </div>
+      <div ng-show="addingBlock" class="overlayOpts">
+        <ul>
+          <li ng-repeat="block in blocks" ng-if="$index > 0"><button ng-click="addBlock(currBlock, $index)">{{block.name}}</button></li>
+        </ul>
+        <button ng-click="newBlock()">Cancel</button>
+      </div>
+    </div>
+    <div id="container">
+      <header>
+        <h1 ng-hide="editing" ng-model="currFlow.header">{{currFlow.header}}</h1>
+        <h1 ng-show="editing"><input type="text" ng-model="currFlow.header"/></h1>
+        <button class="btn admin" ng-class="{active:editing}"ng-click="editMode()">Edit</button>
+      </header>
+      <section id="content">
+        <h2 ng-hide="editing" ng-model="currFlow.subheader">{{currFlow.subheader}}</h2>
+        <h2 ng-show="editing"><textarea type="text" ng-model="currFlow.subheader"></textarea></h2>
+        <div class="block" ng-class="{edit:isEditing()}" ng-repeat="block in currFlow.blocks track by $index" bind-html-compile="blocks[block].contents">
+        </div>
+      </section><section id="info">
+        Stuff
+      </section>
+      <footer>
+        <button class="btn continue" ng-class="{ready:isReady()}">Continue</button>
+      </footer>
+      <section id="toolPanel" ng-show="editing">
+
+      </section>
+    </div>
+  </body>
+  <script type="text/javascript" src="https://code.angularjs.org/1.4.0-rc.2/angular.min.js"></script>
+  <script type="text/javascript" src="js/flows.js"></script>
+  <script type="text/javascript" src="js/app.js"></script>
+
+</html>
